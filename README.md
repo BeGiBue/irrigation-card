@@ -1,69 +1,121 @@
-# Irrigation Card 💧
+<h1 align="center">Irrigation Card</h1>
 
-Eine Home-Assistant-Lovelace-Karte zur Bewässerungssteuerung: eine globale Pumpe und beliebig viele Zonen – komplett im visuellen Editor konfigurierbar.
+<p align="center">
+  Custom-Card zur Bewässerungssteuerung mit <strong>Hunter Hydrawise</strong> in Home Assistant.
+</p>
 
-Pro Zone werden angezeigt:
+<p align="center">
+  <strong>Version 1.0.0</strong><br>
+  <a href="https://github.com/BeGiBue/irrigation-card/actions/workflows/validate.yml"><img src="https://github.com/BeGiBue/irrigation-card/actions/workflows/validate.yml/badge.svg" alt="HACS validation"></a>
+</p>
 
-| Element | Entität (Beispiel „Rasen“) |
-|---|---|
-| Manuelle Bewässerung (Schalter) | `switch.rasen_manuelle_bewasserung` |
-| Automatische Bewässerung (Schalter) | `switch.rasen_automatische_bewasserung` |
-| Nächster Zyklus | `sensor.rasen_nachster_zyklus` |
-| Bewässerungszeit | `sensor.rasen_bewasserungszeit` |
-| Bewässerung aktiv | `binary_sensor.rasen_bewasserung` |
+## Funktionen
 
-Läuft eine Zone, wird sie farbig hervorgehoben und animiert. Ein Klick auf Sensoren öffnet den Mehr-Info-Dialog, Schalter werden direkt umgeschaltet.
+- Zonen werden direkt als **Hydrawise-Geräte** ausgewählt – mehrere Zonen über den nativen Geräte-Picker hinzufügen, entfernen und sortieren
+- Ohne Auswahl erscheinen automatisch alle Hydrawise-Zonen
+- Alle Entitäten einer Zone werden selbst gefunden (Entity-Registry, `translation_key`) – unabhängig von Sprache und Entity-IDs
+- Pro Zone: Status (Bereit / Bewässert / Pausiert / Offline), nächster Zyklus, heute bewässert, Automatik-Schalter
+- Manueller Start mit wählbarer Dauer (Standard 5 / 10 / 15 / 30 min) über `hydrawise.start_watering`
+- Laufende Zone: Restzeit mit Fortschrittsbalken und Stopp-Taste; die Restzeit wird zwischen den Hydrawise-Abfragen minütlich heruntergezählt
+- Nach Start/Stopp fordert die Card sofort ein Update an (Hydrawise fragt sonst nur alle 5 Minuten ab)
+- Controller-Kacheln: Online-Status, Regensensor, heute bewässert, Wasserverbrauch (mit Durchflusssensor), aktive Zonen
+- Optionale Pumpe (z. B. `switch.gartenpumpe`) als Schalter
+- Foto als Banner hinter dem Titel oder dezent im Kartenhintergrund
+- Theme-sensitive Darstellung für Light Mode, Dark Mode und eigene Themes (Glas-Look wie die [NAS Card](https://github.com/BeGiBue/nas-card))
+- Optimiert für Hochformat und Touch – iPhone, iPad und Raspberry-Pi-Kiosk: Schrift wächst mit der Kartenbreite, breites Layout ab 480 px
 
-## Installation
+## Voraussetzung
 
-### HACS (benutzerdefiniertes Repository)
-1. HACS → ⋮ → *Benutzerdefinierte Repositories* → `https://github.com/BeGiBue/irrigation-card`, Typ **Dashboard**.
-2. „Irrigation Card“ installieren und den Browser neu laden.
+Die Integration [Hunter Hydrawise](https://www.home-assistant.io/integrations/hydrawise/) ist eingerichtet. Sie legt pro Zone ein Gerät mit diesen Entitäten an (Beispiel Zone „Rasen“):
+
+```text
+valve.rasen
+switch.rasen_manuelle_bewasserung
+switch.rasen_automatische_bewasserung
+sensor.rasen_nachster_zyklus
+sensor.rasen_bewasserungszeit          (verbleibende Bewässerungszeit)
+binary_sensor.rasen_bewasserung
+sensor.rasen_tagliche_aktive_bewasserungszeit
+```
+
+Die Card liest diese Zuordnung aus dem Gerät – die Entity-IDs müssen nicht eingetragen werden.
+
+## Installation über HACS
+
+### Automatisch
+
+[![Open your Home Assistant instance and open this repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=BeGiBue&repository=irrigation-card&category=plugin)
 
 ### Manuell
-1. `irrigation-card.js` nach `/config/www/irrigation-card.js` kopieren.
-2. *Einstellungen → Dashboards → ⋮ → Ressourcen* → `/local/irrigation-card.js` als **JavaScript-Modul** hinzufügen.
 
-## Konfiguration
+1. In HACS **Benutzerdefinierte Repositories** öffnen.
+2. `https://github.com/BeGiBue/irrigation-card` hinzufügen.
+3. Als Typ **Dashboard** auswählen.
+4. **Irrigation Card** installieren.
+5. Home Assistant bzw. den Browser vollständig neu laden.
 
-Im Dashboard *Karte hinzufügen → Irrigation Card*. Im Editor lassen sich Zonen hinzufügen, entfernen, sortieren und einzeln bearbeiten.
+## Card hinzufügen
 
-**Präfix-Kurzform:** Trägst du bei einer Zone nur das Präfix (z. B. `rasen`) ein, werden alle leeren Entitätsfelder automatisch nach dem Muster oben ergänzt. Einzeln gesetzte Entitäten haben Vorrang.
+Minimal – alle Hydrawise-Zonen automatisch:
+
+```yaml
+type: custom:irrigation-card
+```
+
+Mit ausgewählten Zonen (Geräte-IDs, am einfachsten im grafischen Editor wählen):
 
 ```yaml
 type: custom:irrigation-card
 title: Bewässerung
-pump: switch.gartenpumpe
-pump_name: Gartenpumpe
+subtitle: Hunter Hydrawise
 zones:
-  - name: Rasen
-    icon: mdi:sprinkler-variant
-    prefix: rasen
-  - name: Hochbeet
-    icon: mdi:flower
-    manual_switch: switch.hochbeet_manuelle_bewasserung
-    auto_switch: switch.hochbeet_automatische_bewasserung
-    next_cycle_sensor: sensor.hochbeet_nachster_zyklus
-    duration_sensor: sensor.hochbeet_bewasserungszeit
-    active_sensor: binary_sensor.hochbeet_bewasserung
+  - 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d
+  - 6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a
+pump_entity: switch.gartenpumpe
+pump_title: Gartenpumpe
+durations: 5, 10, 15, 30
+image_url: /local/images/rasen.jpg
 ```
 
-### Optionen
+## Optionen
 
-| Option | Typ | Standard | Beschreibung |
+| Option | Werte | Standard | Beschreibung |
 |---|---|---|---|
-| `title` | string | `Bewässerung` | Kartentitel |
-| `icon` | string | `mdi:sprinkler-variant` | Icon im Titel |
-| `pump` | entity | – | Globale Pumpe (`switch`, `valve`, `input_boolean`) |
-| `pump_name` | string | Anzeigename der Entität | Name der Pumpe |
-| `pump_icon` | string | `mdi:pump` | Icon der Pumpe |
-| `show_pump` | boolean | `true` | Pumpe anzeigen |
-| `zones` | list | `[]` | Zonen (siehe unten) |
+| `title` | Text | `Bewässerung` | Haupttitel |
+| `subtitle` | Text | `Hunter Hydrawise` | Untertitel |
+| `zones` | Liste von Geräte-IDs | leer | Hydrawise-Zonen in Anzeigereihenfolge. Leer = alle Zonen. |
+| `durations` | Text | `5, 10, 15, 30` | Startdauern in Minuten (max. 6, je 1 – 1440). |
+| `pump_entity` | Entität | `switch.gartenpumpe` | Pumpe als Schalter; wird ausgeblendet, wenn die Entität fehlt. |
+| `pump_title` | Text | `Gartenpumpe` | Bezeichnung der Pumpe |
+| `show_controller` | `true` \| `false` | `true` | Kacheln für Controller-Status, Regensensor und Tageswerte |
+| `status_entity` | Entität | automatisch | Controller-Status überschreiben |
+| `rain_entity` | Entität | automatisch | Regensensor überschreiben (z. B. ein eigener Sensor) |
+| `show_image` | `true` \| `false` | `true` | Bild anzeigen |
+| `image_mode` | `banner` \| `background` | `banner` | `banner`: Foto hinter dem Titel. `background`: blass im Kartenhintergrund. |
+| `image_url` | URL | leer | Eigenes Bild, z. B. `/local/images/rasen.jpg` |
+| `layout` | `auto` \| `wide` \| `compact` | `auto` | `auto`: breites Layout ab 480 px Kartenbreite |
+| `scale` | `0.8` – `1.8` | `1` | Skaliert die gesamte Card, z. B. für Kiosk-Displays |
 
-**Zone:** `name`, `icon`, `prefix`, `manual_switch`, `auto_switch`, `next_cycle_sensor`, `duration_sensor`, `active_sensor` – alle optional.
+Die Akzentfarbe lässt sich per Theme mit `--irrigation-color` anpassen.
 
-Ohne `active_sensor` gilt eine Zone als aktiv, wenn `manual_switch` eingeschaltet ist.
+## Grafischer Editor
 
-### Design
+Die Card verwendet Home Assistants eingebauten Formular-Editor (`getConfigForm()`) mit den Gruppen **Allgemein**, **Zonen**, **Steuerung** und **Controller**. Zonen werden im Geräte-Picker ausgewählt, der nur Hydrawise-Zonen anbietet. Weitere Zonen kommen über „Gerät hinzufügen“ dazu.
 
-Die Akzentfarbe lässt sich per Theme oder [card-mod](https://github.com/thomasloven/lovelace-card-mod) über `--irrigation-accent-color` anpassen.
+## Bedienung
+
+| Element | Aktion |
+|---|---|
+| Dauer-Taste (z. B. „10 min“) | `hydrawise.start_watering` mit dieser Dauer |
+| Stopp | schaltet `switch.<zone>_manuelle_bewasserung` aus |
+| Automatik | schaltet `switch.<zone>_automatische_bewasserung` (aus = Hydrawise pausiert die Zone für 365 Tage) |
+| Pumpe | schaltet die Pumpen-Entität um |
+| Kacheln, Zeilen, Status-Pill | öffnen den Mehr-Info-Dialog |
+
+## Hinweise zu Marken
+
+Dieses Projekt ist ein unabhängiges Community-Projekt und steht in keiner Verbindung zu Hunter Industries oder Home Assistant. **Hunter** und **Hydrawise** sind Marken ihrer jeweiligen Rechteinhaber.
+
+## Lizenz
+
+GNU Affero General Public License v3.0 only (**AGPL-3.0-only**). Details stehen in [`LICENSE`](LICENSE).
