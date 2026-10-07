@@ -20,7 +20,7 @@
 - Nach Start/Stopp fordert die Card sofort ein Update an (Hydrawise fragt sonst nur alle 5 Minuten ab)
 - Controller-Kacheln: Online-Status, Regensensor, heute bewässert, Wasserverbrauch (mit Durchflusssensor), aktive Zonen
 - Optionale Pumpe (z. B. `switch.gartenpumpe`) als Schalter
-- Foto als Banner hinter dem Titel oder dezent im Kartenhintergrund
+- Eingebettetes Foto (Hunter MP Rotator) als Banner hinter dem Titel oder dezent im Kartenhintergrund – optional eigene Bild-URL
 - Theme-sensitive Darstellung für Light Mode, Dark Mode und eigene Themes (Glas-Look wie die [NAS Card](https://github.com/BeGiBue/nas-card))
 - Optimiert für Hochformat und Touch – iPhone, iPad und Raspberry-Pi-Kiosk: Schrift wächst mit der Kartenbreite, breites Layout ab 480 px
 
@@ -92,7 +92,7 @@ image_url: /local/images/rasen.jpg
 | `rain_entity` | Entität | automatisch | Regensensor überschreiben (z. B. ein eigener Sensor) |
 | `show_image` | `true` \| `false` | `true` | Bild anzeigen |
 | `image_mode` | `banner` \| `background` | `banner` | `banner`: Foto hinter dem Titel. `background`: blass im Kartenhintergrund. |
-| `image_url` | URL | leer | Eigenes Bild, z. B. `/local/images/rasen.jpg` |
+| `image_url` | URL | leer | Eigenes Bild, z. B. `/local/images/rasen.jpg`. Leer = eingebettetes Standardbild. |
 | `layout` | `auto` \| `wide` \| `compact` | `auto` | `auto`: breites Layout ab 480 px Kartenbreite |
 | `scale` | `0.8` – `1.8` | `1` | Skaliert die gesamte Card, z. B. für Kiosk-Displays |
 
@@ -111,6 +111,10 @@ Die Card verwendet Home Assistants eingebauten Formular-Editor (`getConfigForm()
 | Automatik | schaltet `switch.<zone>_automatische_bewasserung` (aus = Hydrawise pausiert die Zone für 365 Tage) |
 | Pumpe | schaltet die Pumpen-Entität um |
 | Kacheln, Zeilen, Status-Pill | öffnen den Mehr-Info-Dialog |
+
+## Bild
+
+Das Standardbild (`images/MP-Rotator-Flyer.webp`, zugeschnitten und gespiegelt) ist direkt in der JavaScript-Datei eingebettet, da HACS nur `irrigation-card.js` installiert. Mit `show_image: false` wird es ausgeblendet.
 
 ## Hinweise zu Marken
 

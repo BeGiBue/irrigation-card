@@ -8,5 +8,5 @@
 - Manueller Start mit wählbaren Dauern, Stopp, Automatik-Schalter, Restzeit mit Fortschrittsbalken.
 - Sofortiges Update nach Start/Stopp; Restzeit wird zwischen den Abfragen heruntergezählt.
 - Controller-Kacheln (Status, Regensensor, Tageswerte, aktive Zonen) und optionale Pumpe.
-- Foto als Banner oder im Kartenhintergrund, eigene Bild-URL möglich.
+- Eingebettetes Standardbild (Hunter MP Rotator) als Banner oder im Kartenhintergrund, eigene Bild-URL möglich.
 - Glas-Look, Light/Dark Mode, optimiert für Hochformat, Touch und Kiosk (`layout`, `scale`).
