@@ -21,7 +21,7 @@
 - Nach Start/Stopp fordert die Card sofort ein Update an (Hydrawise fragt sonst nur alle 5 Minuten ab)
 - Aufbau von oben nach unten: Titel, Pumpe, Zonen, Statistiken, Controller
 - Optionale Pumpe (z. B. `switch.gartenpumpe`) als Schalter direkt unter dem Titel – Zustand und Schalter am rechten Rand
-- Statistiken unter den Zonen: heute bewässert, Wasserverbrauch (nur wenn eine Verbrauchs-Entität existiert), aktive Zonen; darunter Controller-Status und Regensensor – jeweils einzeilig mit dem Wert am rechten Rand
+- Statistiken unter den Zonen: heute bewässert, Wasserverbrauch (nur wenn eine Verbrauchs-Entität existiert), aktive Zonen, optional Leistung und Energie eines Leistungsmessers (z. B. Messsteckdose der Pumpe); darunter Controller-Status und Regensensor – jeweils einzeilig mit dem Wert am rechten Rand
 - Eingebettetes Foto (Hunter MP Rotator) als Banner hinter dem Titel oder dezent im Kartenhintergrund – optional eigene Bild-URL
 - Theme-sensitive Darstellung für Light Mode, Dark Mode und eigene Themes (Glas-Look wie die [NAS Card](https://github.com/BeGiBue/nas-card))
 - Optimiert für Hochformat und Touch – iPhone, iPad und Raspberry-Pi-Kiosk: Schrift wächst mit der Kartenbreite, breites Layout ab 480 px
@@ -105,6 +105,8 @@ Alle Optionen sind im grafischen Editor mit Standardfeldern von Home Assistant e
 | `show_stats` | `true` \| `false` | `true` | Heute bewässert, Wasserverbrauch und aktive Zonen anzeigen |
 | `daily_time_entity` | Entität | automatisch | Tägliche Bewässerungszeit überschreiben |
 | `water_use_entity` | Entität | automatisch | Wasserverbrauch überschreiben. Hydrawise legt ihn nur mit Durchflusssensor an – ohne Entität wird kein Verbrauch angezeigt. |
+| `power_entity` | Entität | leer | Leistungsmesser – aktuelle Leistung (`device_class: power`), z. B. Messsteckdose der Pumpe. Kachel wird orange, sobald Leistung anliegt. |
+| `energy_entity` | Entität | leer | Leistungsmesser – Energie (`device_class: energy`), z. B. kWh-Zähler der Messsteckdose |
 | **Controller** | | | |
 | `show_controller` | `true` \| `false` | `true` | Controller-Status und Regensensor anzeigen |
 | `status_entity` | Entität | automatisch | Controller-Status überschreiben |

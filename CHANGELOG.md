@@ -10,6 +10,7 @@
 
 - Alle Einstellungen im grafischen Editor mit Standardfeldern, gegliedert in Allgemein, Bild, Zonen, Pumpe, Statistiken und Controller.
 - Startdauern als Mehrfachauswahl (eigene Werte möglich) statt Freitext; Textangaben wie `5, 10, 15` funktionieren weiterhin.
+- Leistungsmesser: neue Optionen `power_entity` (Leistung) und `energy_entity` (Energie) mit Kacheln im Statistik-Bereich.
 - Neue Optionen `show_pump`, `show_stats`, `daily_time_entity` und `water_use_entity`; `show_controller` blendet nur noch Controller-Status und Regensensor aus.
 
 ### Behoben
