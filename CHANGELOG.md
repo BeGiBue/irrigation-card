@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.3 - 2026-10-08
+
+### Entfernt
+
+- Option `layout` (auto/wide/compact): Sie hatte seit 1.1.0 keine Wirkung mehr, die Card passt sich automatisch der Breite an. Vorhandene `layout`-Einträge werden ignoriert.
+- Leerer Platzhalter `images/.keepfolder`.
+
 ## 1.1.2 - 2026-10-08
 
 ### Geändert

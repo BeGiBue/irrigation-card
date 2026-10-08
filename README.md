@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Version 1.1.2</strong><br>
+  <strong>Version 1.1.3</strong><br>
   <a href="https://github.com/BeGiBue/irrigation-card/actions/workflows/validate.yml"><img src="https://github.com/BeGiBue/irrigation-card/actions/workflows/validate.yml/badge.svg" alt="HACS validation"></a>
 </p>
 
@@ -25,7 +25,7 @@
 - Eingebettetes Foto (Hunter MP Rotator) als Banner hinter dem Titel oder dezent im Kartenhintergrund – optional eigene Bild-URL
 - Theme-sensitive Darstellung für Light Mode, Dark Mode und eigene Themes (Glas-Look wie die [NAS Card](https://github.com/BeGiBue/nas-card))
 - Feste Kartenhöhe: richtet sich immer nach dem Inhalt und ist im Layout-Editor nicht verstellbar; nur die Breite (4 – 12 Spalten) ist frei
-- Optimiert für Hochformat und Touch – iPhone, iPad und Raspberry-Pi-Kiosk: Schrift wächst mit der Kartenbreite, breites Layout ab 480 px
+- Optimiert für Hochformat und Touch – iPhone, iPad und Raspberry-Pi-Kiosk: Schrift und Anordnung passen sich automatisch der Kartenbreite an (Zonen und Kacheln ab ausreichender Breite nebeneinander)
 
 ## Voraussetzung
 
@@ -89,7 +89,6 @@ Alle Optionen sind im grafischen Editor mit Standardfeldern von Home Assistant e
 | **Allgemein** | | | |
 | `title` | Text | `Bewässerung` | Haupttitel |
 | `subtitle` | Text | `Hunter Hydrawise` | Untertitel; leer = Name des Controllers |
-| `layout` | `auto` \| `wide` \| `compact` | `auto` | `auto`: breites Layout ab 480 px Kartenbreite |
 | `scale` | `0.8` – `1.8` | `1` | Skaliert die gesamte Card, z. B. für Kiosk-Displays |
 | **Bild** | | | |
 | `show_image` | `true` \| `false` | `true` | Bild anzeigen |
