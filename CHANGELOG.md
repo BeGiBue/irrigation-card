@@ -8,8 +8,13 @@
 - Pumpe und Controller-Kacheln einzeilig: Titel links, Wert bzw. Zustand und Schalter am rechten Rand.
 - Controller-Kacheln breit in zwei Spalten; eine übrige Kachel nutzt die volle Breite.
 
+- Alle Einstellungen im grafischen Editor mit Standardfeldern, gegliedert in Allgemein, Bild, Zonen, Pumpe, Statistiken und Controller.
+- Startdauern als Mehrfachauswahl (eigene Werte möglich) statt Freitext; Textangaben wie `5, 10, 15` funktionieren weiterhin.
+- Neue Optionen `show_pump`, `show_stats`, `daily_time_entity` und `water_use_entity`; `show_controller` blendet nur noch Controller-Status und Regensensor aus.
+
 ### Behoben
 
+- Wasserverbrauch und Tageswerte erscheinen nur, wenn die Entität tatsächlich existiert.
 - „Nächster Zyklus“ zeigte bei Terminen am Folgetag doppelt „Morgen … morgen“.
 
 ## 1.0.0 - 2026-10-07

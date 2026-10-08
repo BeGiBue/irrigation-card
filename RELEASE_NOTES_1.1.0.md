@@ -6,6 +6,9 @@ Neue Anordnung: Pumpe oben, Controller unten.
 
 - Pumpe direkt unter dem Titel; unter den Zonen erst die Statistiken, dann Controller und Regensensor
 - Pumpe und Controller-Kacheln einzeilig – Werte am rechten Rand
+- Alle Einstellungen im grafischen Editor mit Standardfeldern; Startdauern als Mehrfachauswahl
+- Pumpe, Statistiken und Controller einzeln ein- und ausblendbar
+- Wasserverbrauch nur, wenn eine Verbrauchs-Entität existiert
 - „Nächster Zyklus“ am Folgetag ohne doppeltes „morgen“
 
 ## Update
