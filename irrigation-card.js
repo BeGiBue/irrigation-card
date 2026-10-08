@@ -159,15 +159,17 @@ class IrrigationCard extends HTMLElement{
   _render(){
     const c=this._config,z=this._zones,k=this._ctrl,sc=Math.min(1.8,Math.max(.8,Number(c.scale)||1));
     const anyRun=z.some(x=>this._running(x)),pump=this._s(c.pump_entity);
-    const tiles=[];
+    // Statistiken über den Controller-Kacheln, jeweils eigenes Raster
+    const stats=[],ctrl=[],running=z.filter(x=>this._running(x)).length;
     if(c.show_controller!==false){
-      if(k.status){const on=this._on(k.status);tiles.push(this._tile(on?"mdi:cloud-check-outline":"mdi:cloud-off-outline","Controller",on?"Online":"Offline",on?"success":"error",k.status));}
-      if(k.rain){const wet=this._on(k.rain),ok=this._ok(k.rain);tiles.push(this._tile(wet?"mdi:weather-pouring":"mdi:weather-sunny","Regensensor",ok?wet?"Regen":"Trocken":"—",wet?"warning":"success",k.rain));}
-      if(k.daily_time)tiles.push(this._tile("mdi:timelapse","Heute bewässert",this._dur(this._secs(k.daily_time)),"primary",k.daily_time));
-      if(k.daily_use)tiles.push(this._tile("mdi:water","Verbrauch heute",this._f(k.daily_use),"primary",k.daily_use));
+      if(k.daily_time)stats.push(this._tile("mdi:timelapse","Heute bewässert",this._dur(this._secs(k.daily_time)),"primary",k.daily_time));
+      if(k.daily_use)stats.push(this._tile("mdi:water","Verbrauch heute",this._f(k.daily_use),"primary",k.daily_use));
     }
-    const running=z.filter(x=>this._running(x)).length;
-    tiles.push(`<div class="tile tone-${running?"primary":"neutral"}"><span class="chip"><ha-icon icon="mdi:sprinkler"></ha-icon></span><span class="lbl">Aktive Zonen</span><span class="val"><b>${running}</b><em>/ ${z.length}</em></span></div>`);
+    stats.push(`<div class="tile tone-${running?"primary":"neutral"}"><span class="chip"><ha-icon icon="mdi:sprinkler"></ha-icon></span><span class="lbl">Aktive Zonen</span><span class="val"><b>${running}</b><em>/ ${z.length}</em></span></div>`);
+    if(c.show_controller!==false){
+      if(k.status){const on=this._on(k.status);ctrl.push(this._tile(on?"mdi:cloud-check-outline":"mdi:cloud-off-outline","Controller",on?"Online":"Offline",on?"success":"error",k.status));}
+      if(k.rain){const wet=this._on(k.rain),ok=this._ok(k.rain);ctrl.push(this._tile(wet?"mdi:weather-pouring":"mdi:weather-sunny","Regensensor",ok?wet?"Regen":"Trocken":"—",wet?"warning":"success",k.rain));}
+    }
     const img=c.show_image!==false?(c.image_url?.trim()||EMBEDDED_IMAGE_URL):"",bgm=img&&c.image_mode==="background",ban=img&&!bgm;
     const pumpRow=pump?`<button class="panel pump${this._on(c.pump_entity)?" on":""}" data-toggle="${this._e(c.pump_entity)}" ${this._ok(c.pump_entity)?"":"disabled"}><span class="chip"><ha-icon icon="mdi:pump"></ha-icon></span><b class="pt">${this._e(c.pump_title||pump.attributes?.friendly_name||"Pumpe")}</b><span class="ps">${this._e(this._f(c.pump_entity))}</span>${this._sw(this._on(c.pump_entity))}</button>`:"";
     const empty=`<section class="panel empty"><ha-icon icon="mdi:information-outline"></ha-icon><span>Keine Hydrawise-Zonen gefunden. Richte die Integration <b>Hunter Hydrawise</b> ein oder wähle die Zonen im Karteneditor aus.</span></section>`;
@@ -177,7 +179,8 @@ class IrrigationCard extends HTMLElement{
       </section>
       ${pumpRow}
       ${z.length?`<section class="zones">${z.map(x=>this._zone(x)).join("")}</section>`:empty}
-      <section class="tiles">${tiles.join("")}</section>
+      <section class="tiles">${stats.join("")}</section>
+      ${ctrl.length?`<section class="tiles">${ctrl.join("")}</section>`:""}
     </main></ha-card>`;
     this.shadowRoot.querySelectorAll(".pic").forEach(im=>im.onerror=()=>{if(EMBEDDED_IMAGE_URL&&im.src!==EMBEDDED_IMAGE_URL)im.src=EMBEDDED_IMAGE_URL;else(im.closest(".banner")||im).classList.add("noimg");});
     const by=id=>z.find(x=>x.id===id);

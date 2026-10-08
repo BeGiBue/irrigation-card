@@ -4,7 +4,7 @@
 
 ### Geändert
 
-- Neue Reihenfolge: Pumpe direkt unter dem Titel, Controller-Kacheln unter den Zonen.
+- Neue Reihenfolge: Pumpe direkt unter dem Titel, darunter die Zonen, dann die Statistiken (Heute bewässert, Verbrauch, aktive Zonen) und zuletzt Controller-Status und Regensensor.
 - Pumpe und Controller-Kacheln einzeilig: Titel links, Wert bzw. Zustand und Schalter am rechten Rand.
 - Controller-Kacheln breit in zwei Spalten; eine übrige Kachel nutzt die volle Breite.
 

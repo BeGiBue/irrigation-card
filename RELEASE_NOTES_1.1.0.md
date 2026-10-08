@@ -4,7 +4,7 @@ Neue Anordnung: Pumpe oben, Controller unten.
 
 ## Änderungen
 
-- Pumpe direkt unter dem Titel, Controller-Kacheln unter den Zonen
+- Pumpe direkt unter dem Titel; unter den Zonen erst die Statistiken, dann Controller und Regensensor
 - Pumpe und Controller-Kacheln einzeilig – Werte am rechten Rand
 - „Nächster Zyklus“ am Folgetag ohne doppeltes „morgen“
 
