@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 - 2026-10-08
+
+### Geändert
+
+- Kachel „Aktive Zonen“ im Statistik-Bereich entfernt; laufende Zonen sind an ihrer Hervorhebung und dem Status „Bewässert“ erkennbar.
+
 ## 1.1.0 - 2026-10-08
 
 ### Geändert
