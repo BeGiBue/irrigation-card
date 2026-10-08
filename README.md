@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Version 1.1.1</strong><br>
+  <strong>Version 1.1.2</strong><br>
   <a href="https://github.com/BeGiBue/irrigation-card/actions/workflows/validate.yml"><img src="https://github.com/BeGiBue/irrigation-card/actions/workflows/validate.yml/badge.svg" alt="HACS validation"></a>
 </p>
 
@@ -24,6 +24,7 @@
 - Statistiken unter den Zonen: heute bewässert, Wasserverbrauch (nur wenn eine Verbrauchs-Entität existiert), optional Leistung und Energie eines Leistungsmessers (z. B. Messsteckdose der Pumpe); darunter Controller-Status und Regensensor – jeweils einzeilig mit dem Wert am rechten Rand
 - Eingebettetes Foto (Hunter MP Rotator) als Banner hinter dem Titel oder dezent im Kartenhintergrund – optional eigene Bild-URL
 - Theme-sensitive Darstellung für Light Mode, Dark Mode und eigene Themes (Glas-Look wie die [NAS Card](https://github.com/BeGiBue/nas-card))
+- Feste Kartenhöhe: richtet sich immer nach dem Inhalt und ist im Layout-Editor nicht verstellbar; nur die Breite (4 – 12 Spalten) ist frei
 - Optimiert für Hochformat und Touch – iPhone, iPad und Raspberry-Pi-Kiosk: Schrift wächst mit der Kartenbreite, breites Layout ab 480 px
 
 ## Voraussetzung
@@ -117,6 +118,10 @@ Die Akzentfarbe lässt sich per Theme mit `--irrigation-color` anpassen.
 ## Grafischer Editor
 
 Die Card verwendet Home Assistants eingebauten Formular-Editor (`getConfigForm()`) mit den aufklappbaren Gruppen **Allgemein**, **Bild**, **Zonen**, **Pumpe**, **Statistiken** und **Controller**. Zonen werden im Geräte-Picker ausgewählt, der nur Hydrawise-Zonen anbietet; die Startdauern sind eine Mehrfachauswahl, in die eigene Minutenwerte eingetippt werden können.
+
+## Layout / Größe
+
+Im Sections-Dashboard ist die Breite von 4 bis 12 Spalten einstellbar. Die Höhe ist fest: Die Card meldet `rows: auto` und ist immer genau so hoch wie ihr Inhalt. Eine im Layout-Editor eingestellte Zeilenzahl ändert die Card nicht.
 
 ## Bedienung
 

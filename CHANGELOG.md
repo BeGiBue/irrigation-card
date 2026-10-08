@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.2 - 2026-10-08
+
+### Geändert
+
+- Feste Kartenhöhe: Die Card ist immer so hoch wie ihr Inhalt (`rows: auto`) und lässt sich im Layout-Editor nicht mehr in der Höhe verstellen oder strecken; nur die Breite ist frei.
+
 ## 1.1.1 - 2026-10-08
 
 ### Geändert
