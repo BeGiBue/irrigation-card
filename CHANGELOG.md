@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.1.0 - 2026-10-08
+
+### Geändert
+
+- Neue Reihenfolge: Pumpe direkt unter dem Titel, darunter die Zonen, dann die Statistiken (Heute bewässert, Verbrauch, aktive Zonen) und zuletzt Controller-Status und Regensensor.
+- Pumpe und Controller-Kacheln einzeilig: Titel links, Wert bzw. Zustand und Schalter am rechten Rand.
+- Controller-Kacheln breit in zwei Spalten; eine übrige Kachel nutzt die volle Breite.
+
+- Alle Einstellungen im grafischen Editor mit Standardfeldern, gegliedert in Allgemein, Bild, Zonen, Pumpe, Statistiken und Controller.
+- Startdauern als Mehrfachauswahl (eigene Werte möglich) statt Freitext; Textangaben wie `5, 10, 15` funktionieren weiterhin.
+- Leistungsmesser: neue Optionen `power_entity` (Leistung) und `energy_entity` (Energie) mit Kacheln im Statistik-Bereich.
+- Neue Optionen `show_pump`, `show_stats`, `daily_time_entity` und `water_use_entity`; `show_controller` blendet nur noch Controller-Status und Regensensor aus.
+
+### Behoben
+
+- Alle Sensoren und Schalter erscheinen nur, wenn die Entität tatsächlich existiert – auch nächster Zyklus, Restzeit und Automatik (vorher teils mit „—“).
+- „Nächster Zyklus“ zeigte bei Terminen am Folgetag doppelt „Morgen … morgen“.
+
 ## 1.0.0 - 2026-10-07
 
 - Erste Veröffentlichung der Irrigation Card für Hunter Hydrawise.
