@@ -142,7 +142,7 @@ class IrrigationCard extends HTMLElement{
   _sw(on){return`<span class="sw${on?" on":""}"><i></i></span>`;}
 
   _zone(z){
-    const run=this._running(z),p=this._pending[z.id],auto=z.auto?this._on(z.auto):true,online=this._ok(z.running||z.manual||z.valve);
+    const run=this._running(z),p=this._pending[z.id],auto=this._s(z.auto)?this._on(z.auto):true,online=this._ok(z.running||z.manual||z.valve);
     const st=!online?["error","Offline"]:p?["primary",p.kind==="start"?"Startet …":"Stoppt …"]:run?["primary","Bewässert"]:!auto?["warning","Pausiert"]:["success","Bereit"];
     const rem=this._remaining(z);
     if(run&&Number.isFinite(rem))this._total[z.id]=Math.max(this._total[z.id]||0,rem);else if(!run&&!p)delete this._total[z.id];
@@ -150,17 +150,17 @@ class IrrigationCard extends HTMLElement{
     const nx=this._when(z.next),today=this._secs(z.daily_time);
     const row=(l,id,v,sm,tone)=>`<button class="drow${tone?` tone-${tone}`:""}" data-more="${this._e(id)}"><span>${l}</span><b>${this._e(v)}${sm?` <em>${this._e(sm)}</em>`:""}</b></button>`;
     const run_box=run||p?.kind==="stop"?`<div class="runbox">
-        <div class="rt"><span class="lbl">Restzeit</span><span class="val"><b>${Number.isFinite(rem)?rem:"—"}</b><em>min</em></span><i class="bar"><u style="width:${pct}%"></u></i></div>
+        ${this._s(z.remaining)?`<div class="rt"><span class="lbl">Restzeit</span><span class="val"><b>${Number.isFinite(rem)?rem:"—"}</b><em>min</em></span><i class="bar"><u style="width:${pct}%"></u></i></div>`:`<div class="rt"><span class="lbl">Bewässerung läuft</span></div>`}
         <button class="stop" data-stop="${this._e(z.id)}" ${p||!online?"disabled":""}><ha-icon icon="mdi:stop"></ha-icon><b>Stopp</b></button></div>`
       :`<div class="starts"><span class="lbl">Manuell starten</span><div class="durs">${this._durations().map(m=>`<button class="dur" data-start="${this._e(z.id)}" data-min="${m}" ${p||!online?"disabled":""}><b>${m}</b><em>min</em></button>`).join("")||`<button class="dur" data-start="${this._e(z.id)}" data-min="0" ${p||!online?"disabled":""}><b>Start</b></button>`}</div></div>`;
     return`<section class="panel zone tone-${st[0]}${run?" running":""}">
       <header><span class="chip"><ha-icon icon="mdi:sprinkler-variant"></ha-icon></span><h3>${this._e(z.name)}</h3><button class="pill" data-more="${this._e(z.running||z.manual)}"><i class="dot"></i><b>${this._e(st[1])}</b></button></header>
       ${run_box}
       <div class="drows">
-        ${row("Nächster Zyklus",z.next,nx.main,nx.rel,!auto?"warning":"")}
+        ${this._s(z.next)?row("Nächster Zyklus",z.next,nx.main,nx.rel,!auto?"warning":""):""}
         ${this._s(z.daily_time)?row("Heute bewässert",z.daily_time,this._dur(today)):""}
         ${this._s(z.daily_use)?row("Verbrauch heute",z.daily_use,this._f(z.daily_use)):""}
-        ${z.auto?`<button class="drow tgl" data-toggle="${this._e(z.auto)}" ${this._ok(z.auto)?"":"disabled"}><span>Automatik</span>${this._sw(auto)}</button>`:""}
+        ${this._s(z.auto)?`<button class="drow tgl" data-toggle="${this._e(z.auto)}" ${this._ok(z.auto)?"":"disabled"}><span>Automatik</span>${this._sw(auto)}</button>`:""}
       </div>
     </section>`;
   }

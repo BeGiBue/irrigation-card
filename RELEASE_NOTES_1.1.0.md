@@ -8,7 +8,7 @@ Neue Anordnung: Pumpe oben, Controller unten.
 - Pumpe und Controller-Kacheln einzeilig – Werte am rechten Rand
 - Alle Einstellungen im grafischen Editor mit Standardfeldern; Startdauern als Mehrfachauswahl
 - Pumpe, Statistiken und Controller einzeln ein- und ausblendbar
-- Wasserverbrauch nur, wenn eine Verbrauchs-Entität existiert
+- Jeder Sensor und Schalter erscheint nur, wenn die Entität existiert (z. B. Wasserverbrauch nur mit Durchflusssensor)
 - „Nächster Zyklus“ am Folgetag ohne doppeltes „morgen“
 
 ## Update

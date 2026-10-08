@@ -14,7 +14,7 @@
 
 ### Behoben
 
-- Wasserverbrauch und Tageswerte erscheinen nur, wenn die Entität tatsächlich existiert.
+- Alle Sensoren und Schalter erscheinen nur, wenn die Entität tatsächlich existiert – auch nächster Zyklus, Restzeit und Automatik (vorher teils mit „—“).
 - „Nächster Zyklus“ zeigte bei Terminen am Folgetag doppelt „Morgen … morgen“.
 
 ## 1.0.0 - 2026-10-07

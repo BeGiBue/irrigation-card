@@ -14,6 +14,7 @@
 - Zonen werden direkt als **Hydrawise-Geräte** ausgewählt – mehrere Zonen über den nativen Geräte-Picker hinzufügen, entfernen und sortieren
 - Ohne Auswahl erscheinen automatisch alle Hydrawise-Zonen
 - Alle Entitäten einer Zone werden selbst gefunden (Entity-Registry, `translation_key`) – unabhängig von Sprache und Entity-IDs
+- Jeder Wert und jeder Schalter erscheint nur, wenn die zugehörige Entität existiert – fehlende Sensoren werden ausgeblendet statt mit „—“ angezeigt
 - Pro Zone: Status (Bereit / Bewässert / Pausiert / Offline), nächster Zyklus, heute bewässert, Automatik-Schalter
 - Manueller Start mit wählbarer Dauer (Standard 5 / 10 / 15 / 30 min) über `hydrawise.start_watering`
 - Laufende Zone: Restzeit mit Fortschrittsbalken und Stopp-Taste; die Restzeit wird zwischen den Hydrawise-Abfragen minütlich heruntergezählt
