@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.0 - 2026-10-08
+
+### Geändert
+
+- Neue Reihenfolge: Pumpe direkt unter dem Titel, Controller-Kacheln unter den Zonen.
+- Pumpe und Controller-Kacheln einzeilig: Titel links, Wert bzw. Zustand und Schalter am rechten Rand.
+- Controller-Kacheln breit in zwei Spalten; eine übrige Kachel nutzt die volle Breite.
+
+### Behoben
+
+- „Nächster Zyklus“ zeigte bei Terminen am Folgetag doppelt „Morgen … morgen“.
+
 ## 1.0.0 - 2026-10-07
 
 - Erste Veröffentlichung der Irrigation Card für Hunter Hydrawise.

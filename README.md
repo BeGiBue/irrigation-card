@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Version 1.0.0</strong><br>
+  <strong>Version 1.1.0</strong><br>
   <a href="https://github.com/BeGiBue/irrigation-card/actions/workflows/validate.yml"><img src="https://github.com/BeGiBue/irrigation-card/actions/workflows/validate.yml/badge.svg" alt="HACS validation"></a>
 </p>
 
@@ -18,8 +18,9 @@
 - Manueller Start mit wählbarer Dauer (Standard 5 / 10 / 15 / 30 min) über `hydrawise.start_watering`
 - Laufende Zone: Restzeit mit Fortschrittsbalken und Stopp-Taste; die Restzeit wird zwischen den Hydrawise-Abfragen minütlich heruntergezählt
 - Nach Start/Stopp fordert die Card sofort ein Update an (Hydrawise fragt sonst nur alle 5 Minuten ab)
-- Controller-Kacheln: Online-Status, Regensensor, heute bewässert, Wasserverbrauch (mit Durchflusssensor), aktive Zonen
-- Optionale Pumpe (z. B. `switch.gartenpumpe`) als Schalter
+- Aufbau von oben nach unten: Titel, Pumpe, Zonen, Controller
+- Optionale Pumpe (z. B. `switch.gartenpumpe`) als Schalter direkt unter dem Titel – Zustand und Schalter am rechten Rand
+- Controller-Kacheln unter den Zonen: Online-Status, Regensensor, heute bewässert, Wasserverbrauch (mit Durchflusssensor), aktive Zonen – jeweils einzeilig mit dem Wert am rechten Rand
 - Eingebettetes Foto (Hunter MP Rotator) als Banner hinter dem Titel oder dezent im Kartenhintergrund – optional eigene Bild-URL
 - Theme-sensitive Darstellung für Light Mode, Dark Mode und eigene Themes (Glas-Look wie die [NAS Card](https://github.com/BeGiBue/nas-card))
 - Optimiert für Hochformat und Touch – iPhone, iPad und Raspberry-Pi-Kiosk: Schrift wächst mit der Kartenbreite, breites Layout ab 480 px
